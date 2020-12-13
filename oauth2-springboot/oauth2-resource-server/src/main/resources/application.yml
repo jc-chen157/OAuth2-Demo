@@ -1,0 +1,43 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: oauth2-resource-server
+
+---
+spring:
+  profiles: local
+logging:
+  level:
+    root: debug
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-secret-8888
+      user-authorization-uri: http://localhost:8090/oauth/authorize
+      access-token-uri: http://localhost:8090/oauth/token
+    resource:
+      jwt:
+        issuer-uri: http://localhost:8090/oauth/token_key
+        key-value: dev
+---
+spring:
+  profiles: docker
+server:
+  port: 8090
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-secret-8888
+      user-authorization-uri: http://oauth2-auth-server:8090/oauth/authorize
+      access-token-uri: http://oauth2-auth-server:8090/oauth/token
+    resource:
+      jwt:
+        issuer-uri: http://oauth2-auth-server/oauth/token_key
+        key-value: dev
+
+logging:
+  level:
+    root: debug

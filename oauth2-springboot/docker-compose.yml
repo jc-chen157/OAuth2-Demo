@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+
+  oauth2-auth-server:
+    build:
+      context: ./oauth2-auth-server
+    container_name: oauth2-auth-server
+    volumes:
+      - ./oauth2-auth-server/target/oauth2-auth-server-1.0.0-SNAPSHOT.jar:/app.jar
+    networks:
+      - oauth2-spring-demo
+    ports:
+      - "8090:8090"
+    command: ls
+
+  oauth2-resource-server:
+    build:
+      context: ./oauth2-resource-server
+    container_name: oauth2-resource-server
+    volumes:
+      - ./oauth2-resource-server/target/oauth2-resource-server-1.0.0-SNAPSHOT.jar:/app.jar
+    networks:
+      - oauth2-spring-demo
+    ports:
+      - "8091:8090"
+
+#  oauth2-db:
+#    image: library/mysql:8.0
+#    container_name: oauth-db
+#    ports:
+#      - "3306:3306"
+#    networks:
+#      - oauth2-spring-demo
+#    environment:
+#      MYSQL_DATABASE: 'db'
+#      MYSQL_USER: 'user'
+#      MYSQL_PASSWORD: 'password'
+#      MYSQL_ROOT_PASSWORD: 'password'
+#    volumes:
+#      - oauth-db-data:/var/lib/mysql
+#  redis:
+#    image: library/redis:6.0.4
+#    container_name: outh2-redis
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - oauth2-spring-demo
+
+networks:
+  oauth2-spring-demo:
+    driver: bridge
+
+volumes:
+  oauth-db-data:
+    external: false

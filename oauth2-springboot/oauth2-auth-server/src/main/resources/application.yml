@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: oauth2-auth-server
+server:
+  port: 8095
+
+management:
+  endpoint:
+    health:
+      enabled: true
+---
+spring:
+  profiles: local
+logging:
+  level:
+    root: debug
+---
+spring:
+  profiles: docker
+
+server:
+  port: 8090
