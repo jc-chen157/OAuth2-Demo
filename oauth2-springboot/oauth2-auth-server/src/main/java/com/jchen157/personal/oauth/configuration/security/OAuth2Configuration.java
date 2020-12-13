@@ -1,5 +1,6 @@
 package com.jchen157.personal.oauth.configuration.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,28 +17,23 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 @EnableAuthorizationServer
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
-  final PasswordEncoder passwordEncoder;
+  @Autowired
+  PasswordEncoder passwordEncoder;
 
-  final UserDetailsService customUserDetailService;
+  @Autowired
+  UserDetailsService customUserDetailService;
 
-  final AuthenticationManager authenticationManager;
+  @Autowired
+  AuthenticationManager authenticationManager;
 
-  final TokenStore jwtToken;
-  final JwtAccessTokenConverter jwtAccessTokenConverter;
+  @Autowired
+  TokenStore jwtToken;
+  @Autowired
+  JwtAccessTokenConverter jwtAccessTokenConverter;
 
-  public OAuth2Configuration(
-          PasswordEncoder passwordEncoder,
-          UserDetailsService customUserDetailService,
-          AuthenticationManager authenticationManager,
-          TokenStore jwtToken,
-          JwtAccessTokenConverter jwtAccessTokenConverter) {
-    this.passwordEncoder = passwordEncoder;
-    this.customUserDetailService = customUserDetailService;
-    this.authenticationManager = authenticationManager;
-    this.jwtToken = jwtToken;
-    this.jwtAccessTokenConverter = jwtAccessTokenConverter;
-  }
-
+  /*
+   * Cache token in redis
+   */
   @Override
   public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     endpoints
@@ -61,7 +57,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
                     "client_credentials", "refresh_token", "authorization_code", "password")
             .scopes("all", "read", "write")
             .accessTokenValiditySeconds(3600)
-            .redirectUris("http://localhost:8090/login");
+            .redirectUris("http://localhost:8095/login");
   }
 
   @Override
