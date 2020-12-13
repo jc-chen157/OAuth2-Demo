@@ -1,0 +1,6 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../:\git\OAuth2-Demo\oauth2-springboot\.idea/dataSources/
+/dataSources.local.xml
