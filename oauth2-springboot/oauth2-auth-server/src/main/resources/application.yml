@@ -2,7 +2,7 @@ spring:
   application:
     name: oauth2-auth-server
 server:
-  port: 8095
+  port: 8090
 
 management:
   endpoint:
@@ -11,9 +11,15 @@ management:
 ---
 spring:
   profiles: local
-logging:
-  level:
-    root: debug
+
+
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-secret-8888
+
+
 ---
 spring:
   profiles: docker
