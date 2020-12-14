@@ -1,0 +1,19 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: oauth2-resource-server
+
+---
+spring:
+  profiles: local
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-secret-8888
+      access-token-uri: http://localhost:8090/oauth/token
+    resource:
+      user-info-uri: fakeurl
+    authorization:
+      check-token-access: http://localhost:8090/oauth/check_token
