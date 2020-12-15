@@ -17,3 +17,20 @@ security:
       user-info-uri: fakeurl
     authorization:
       check-token-access: http://localhost:8090/oauth/check_token
+
+---
+spring:
+  profiles: docker
+
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-secret-8888
+      access-token-uri: http://oauth2-auth-server:8090/oauth/token
+    resource:
+      user-info-uri: fakeurl
+    authorization:
+      check-token-access: http://oauth2-auth-server:8090/oauth/check_token
+server:
+  port: 8090

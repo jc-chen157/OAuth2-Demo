@@ -11,14 +11,13 @@ services:
       - oauth2-spring-demo
     ports:
       - "8090:8090"
-    command: ls
 
   oauth2-resource-server:
     build:
-      context: ./oauth2-resource-server
-    container_name: oauth2-resource-server
+      context: ./oauth2-spring-resource-server
+    container_name: oauth2-spring-resource-server
     volumes:
-      - ./oauth2-resource-server/target/oauth2-resource-server-1.0.0-SNAPSHOT.jar:/app.jar
+      - ./oauth2-spring-resource-server/target/oauth2-spring-resource-server-1.0.0-SNAPSHOT.jar:/app.jar
     networks:
       - oauth2-spring-demo
     ports:

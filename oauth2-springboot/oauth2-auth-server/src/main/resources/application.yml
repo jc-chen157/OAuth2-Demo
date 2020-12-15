@@ -24,5 +24,8 @@ security:
 spring:
   profiles: docker
 
-server:
-  port: 8090
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-secret-8888

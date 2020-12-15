@@ -22,7 +22,8 @@
 
     <modules>
         <module>oauth2-auth-server</module>
-        <module>spring-security-resource-server</module>
+        <module>oauth2-auth-server-jwt</module>
+        <module>oauth2-spring-resource-server-jwt</module>
         <module>oauth2-spring-resource-server</module>
     </modules>
 
