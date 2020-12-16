@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: oauth2-auth-server-jwt
+server:
+  port: 8090
+
+management:
+  endpoint:
+    health:
+      enabled: true
+---
+spring:
+  profiles: local
+
+
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-secret-8888
+
+
+---
+spring:
+  profiles: docker
+
+server:
+  port: 8090
