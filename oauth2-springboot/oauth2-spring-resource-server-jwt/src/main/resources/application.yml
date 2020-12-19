@@ -1,0 +1,27 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: oauth2-resource-server
+
+---
+spring:
+  profiles: local
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8090/.well-known/jwks.json
+#          issuer-uri: http://localhost:8090/oauth/token
+---
+spring:
+  profiles: docker
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri:
+server:
+  port: 8090
