@@ -12,8 +12,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8090/.well-known/jwks.json
-#          issuer-uri: http://localhost:8090/oauth/token
+#          jwk-set-uri: http://localhost:8090/.well-known/jwks.json
+          jws-algorithm: RS256
+          public-key-location: classpath:my-key.pub
 ---
 spring:
   profiles: docker
