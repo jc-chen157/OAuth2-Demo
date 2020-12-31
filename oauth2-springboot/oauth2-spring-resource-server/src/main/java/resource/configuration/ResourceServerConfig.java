@@ -16,13 +16,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
   private Logger logger = LoggerFactory.getLogger(ResourceServerConfig.class);
 
-  @Value("${security.oauth2.client.client-id}")
+  @Value("${oauth2.client-id}")
   private String clientId;
 
-  @Value("${security.oauth2.client.client-secret}")
+  @Value("${oauth2.client-secret}")
   private String secret;
 
-  @Value("${security.oauth2.authorization.check-token-access}")
+  @Value("${oauth2.check-token-access}")
   private String checkTokenEndpointUrl;
 
   @Bean

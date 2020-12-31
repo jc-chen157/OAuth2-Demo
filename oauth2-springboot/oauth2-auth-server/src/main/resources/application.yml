@@ -8,24 +8,3 @@ management:
   endpoint:
     health:
       enabled: true
----
-spring:
-  profiles: local
-
-
-security:
-  oauth2:
-    client:
-      client-id: user-client
-      client-secret: user-secret-8888
-
-
----
-spring:
-  profiles: docker
-
-security:
-  oauth2:
-    client:
-      client-id: user-client
-      client-secret: user-secret-8888

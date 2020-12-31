@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -16,7 +17,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
   @Autowired
   private AuthenticationManager authenticationManager;
-
+  @Autowired
+  private UserDetailsService userDetailsService;
 
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -38,11 +40,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
     endpoints.authenticationManager(authenticationManager);
+    endpoints.userDetailsService(userDetailsService);
   }
 
+  /**
+   * this endpoint will be used * by resource server to verify token. By default, any request to
+   * `/oauth/check_token` will be denied,
+   *
+   * @param security
+   * @see org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerSecurityConfiguration
+   * for more detail.
+   */
   @Override
-  public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-//    security.allowFormAuthenticationForClients();
-    security.checkTokenAccess("isAuthenticated()");
+  public void configure(AuthorizationServerSecurityConfigurer security) {
+    security.checkTokenAccess("permitAll()");
   }
 }
