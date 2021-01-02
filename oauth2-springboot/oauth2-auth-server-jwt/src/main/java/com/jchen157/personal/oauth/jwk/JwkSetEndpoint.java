@@ -2,9 +2,9 @@ package com.jchen157.personal.oauth.jwk;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
-import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.InputStream;
 import java.security.Key;
@@ -17,7 +17,7 @@ import java.security.cert.Certificate;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
-@FrameworkEndpoint
+@RestController
 public class JwkSetEndpoint {
 
   @GetMapping("/.well-known/jwks.json")
@@ -33,10 +33,12 @@ public class JwkSetEndpoint {
             this.getClass().getClassLoader().getResourceAsStream("my-release-key.keystore");
 
     KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-    keystore.load(is, "jj950303".toCharArray());
     String alias = "alias_name";
+    String password = "jj950303";
 
-    Key key = keystore.getKey(alias, "jj950303".toCharArray());
+    keystore.load(is, password.toCharArray());
+
+    Key key = keystore.getKey(alias, password.toCharArray());
 
     if (key instanceof PrivateKey) {
       // Get certificate of public key

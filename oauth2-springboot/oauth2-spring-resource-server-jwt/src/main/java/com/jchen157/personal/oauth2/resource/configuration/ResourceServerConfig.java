@@ -14,15 +14,16 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    // @formatter:off
-    http
-            .authorizeRequests((authorizeRequests) ->
-                    authorizeRequests
-                            .antMatchers(HttpMethod.GET, "/scope/all").hasAuthority("SCOPE_all")
-                            .antMatchers(HttpMethod.GET, "/scope/read").hasAuthority("SCOPE_read")
-                            .anyRequest().authenticated()
-            )
-            .oauth2ResourceServer().jwt();
-    // @formatter:on
+      http.authorizeRequests(
+              (authorizeRequests) ->
+                      authorizeRequests
+                              .antMatchers(HttpMethod.GET, "/scope/all")
+                              .hasAuthority("SCOPE_all")
+                              .antMatchers(HttpMethod.GET, "/scope/read")
+                              .hasAuthority("SCOPE_read")
+                              .anyRequest()
+                              .authenticated())
+              .oauth2ResourceServer()
+              .jwt();
   }
 }

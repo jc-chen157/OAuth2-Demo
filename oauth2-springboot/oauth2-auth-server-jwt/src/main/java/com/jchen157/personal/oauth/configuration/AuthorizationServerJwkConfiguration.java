@@ -1,9 +1,7 @@
 package com.jchen157.personal.oauth.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.authserver.AuthorizationServerTokenServicesConfiguration;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,8 +12,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 @Configuration
-@Import(AuthorizationServerTokenServicesConfiguration.class)
-public class JwkSetConfiguration extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerJwkConfiguration extends AuthorizationServerConfigurerAdapter {
 
   @Autowired
   private JwtAccessTokenConverter tokenConverter;
@@ -40,14 +37,11 @@ public class JwkSetConfiguration extends AuthorizationServerConfigurerAdapter {
     return PasswordEncoderFactories.createDelegatingPasswordEncoder();
   }
 
-  //
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-    // @formatter:off
     endpoints
             .authenticationManager(this.authenticationManager)
             .accessTokenConverter(tokenConverter)
             .tokenStore(tokenStore);
-    // @formatter:on
   }
 }

@@ -25,6 +25,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
+        <!--
+           spring-security-oauth2-jose.jar contains Spring Security’s support for the JOSE
+           (Javascript Object Signing and Encryption) framework.
+           The JOSE framework is intended to provide a method to securely transfer claims between parties.
+           It is built from a collection of specifications:
+           -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>

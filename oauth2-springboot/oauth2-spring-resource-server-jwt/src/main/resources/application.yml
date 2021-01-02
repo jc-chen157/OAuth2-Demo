@@ -2,7 +2,7 @@ server:
   port: 8091
 spring:
   application:
-    name: oauth2-resource-server
+    name: oauth2-resource-server-jwt
 
 ---
 spring:
@@ -12,8 +12,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-#          jwk-set-uri: http://localhost:8090/.well-known/jwks.json
           jws-algorithm: RS256
+#          jwk-set-uri: http://localhost:8090/.well-known/jwks.json
           public-key-location: classpath:my-key.pub
 ---
 spring:

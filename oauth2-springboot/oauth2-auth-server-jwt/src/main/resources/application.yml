@@ -15,9 +15,6 @@ spring:
 
 security:
   oauth2:
-    client:
-      client-id: user-client
-      client-secret: user-secret-8888
     authorization:
       jwt:
         key-store: classpath:my-release-key.keystore
